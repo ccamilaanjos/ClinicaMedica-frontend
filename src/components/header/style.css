@@ -59,7 +59,7 @@
   margin-right: 80px;
 }
 
-.input,
+.search-input,
 .search-button {
   padding: 10px 15px;
   border-radius: 4px;
@@ -79,12 +79,12 @@
   cursor: pointer;
 }
 
-.input {
+.search-input {
   border: 1px solid black;
   border-width: 2px;
 }
 
-input:focus {
+.search-input:focus {
   border-color: var(--primary-color);
   border-width: 4px;
 }

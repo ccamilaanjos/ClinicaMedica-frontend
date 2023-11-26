@@ -1,0 +1,93 @@
+:root {
+  --primary-color: rgb(34, 139, 118);
+  --primary-font: Verdana;
+}
+
+body {
+  font-family: var(--primary-font);
+}
+
+h3 {
+  padding: 20px;
+}
+
+.input-row {
+  display: flex;
+  margin-bottom: 10px; /* Espaçamento entre as linhas */
+}
+
+.data-input {
+  margin-right: 10px; /* Espaçamento entre os campos */
+}
+
+.cp-title{
+    font-size: 28px;
+    margin: 40px 0px 40px 120px;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column; 
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: 20px;
+  padding-top: 20px;
+}
+
+.user-details .data-input {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 30px);
+}
+
+.obgt {
+  color: red;
+}
+
+form .data-input span.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.data-input input {
+  height: 40px;
+  width: 90%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.data-input input[type="text"] {
+  border: 1px solid black;
+  padding-left: 8px;
+  transition: border-width 0s ease;
+}
+
+.data-input input[type="text"]:focus {
+  border-width: 2px; /* Aumentar a largura da borda quando em foco */
+}
+
+form .pc-button {
+  height: 45px;
+  width: 200px;
+  padding-top: 40px;
+  margin: auto;
+  display: block;
+}
+
+.pc-button button[type="submit"] {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  background: var(--primary-color);
+}
+
+.pc-button button[type="submit"]:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+}

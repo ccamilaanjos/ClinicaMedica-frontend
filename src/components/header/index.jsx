@@ -1,10 +1,11 @@
 import React from 'react';
-import './style.css'
+import './style.css';
+import logo from '../../assets/logo.png';
 
-function Header() {
+function Header () {  
   return (
     <div className='homepage-header'>
-      <img className='logo' src='src\assets\logo.png' />
+      <img className='logo' src={logo}/>
       <nav className='header-buttons'>
         <ul>
           <li>
@@ -15,7 +16,7 @@ function Header() {
           </li>
           <li>
             <div className='search'>
-              <input className='input' type='text' placeholder="Digite algo..."/>
+              <input className='search-input' type='text' placeholder="Digite algo..."/>
                 <button className='search-button'>Buscar</button>
             </div>
           </li>
