@@ -8,7 +8,6 @@ import getData from './crud/get/index';
 function Pacientes() {
   return (
     <div>
-      <Header />
       <Body />
     </div>
   )

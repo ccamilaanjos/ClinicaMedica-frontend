@@ -1,18 +1,8 @@
 import React from 'react';
-import Header from '../header/index.jsx'
 import './style.css';
 import { Link } from 'react-router-dom';
 
 function Homepage() {
-  return(
-    <div>
-        <Header/>
-        <Body/>
-    </div>
-  )
-}
-
-function Body() {
   return (
     <div className='homepage-body'>
       <h1 className='homepage-title'>

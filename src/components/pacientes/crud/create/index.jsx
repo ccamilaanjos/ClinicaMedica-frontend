@@ -1,51 +1,69 @@
 import React from 'react';
-import Header from '../../../header/index';
 import './style.css';
-import EnderecoFields from '../../../enderecos';
+import Endereco from '../../../enderecos/index';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from 'react';
+import DadosPessoais from './DadosPessoais';
 
 function CadastroPaciente() {
   return (
     <div>
-      <Header />
-      <Body />
+      <Formulario />
     </div>
   )
 }
 
-function Body() {
-  const [formulario, setFormulario] = useState({
+function Formulario() {
+  const [dadosPessoais, setDadosPessoais] = useState({
     nome: '',
     email: '',
     telefone: '',
     cpf: ''
   });
 
-  const handleInputChange = (event) => {
+  const handleDadosPessoaisChange = (event) => {
     const { name, value } = event.target;
-    setFormulario({
-      ...formulario,
+    setDadosPessoais({
+      ...dadosPessoais,
       [name]: value,
     });
   };
 
-  const handleCadastrarClick = () => {
-    const camposVazios = Object.values(formulario).some((value) => value.trim() === '');
+  const [endereco, setEndereco] = useState({
+    logradouro: '',
+    bairro: '',
+    estado: '',
+    cidade: '',
+    cep: ''
+  });
+
+  const handleEnderecoChange = (event) => {
+    const { name, value } = event.target;
+    setEndereco({
+      ...endereco,
+      [name]: value,
+    });
+  };
+
+  const checkFields = () => {
+    const camposVaziosEmDados = Object.values(dadosPessoais).some((value) => value.trim() === '');
+    const camposVaziosEmEndereco = Object.values(endereco).some((value) => value.trim() === '');
 
     // acrescentar validação de requisição
-    if (!camposVazios) {
-      toastSucesso();
-    }
-  };
+    console.log('Valores em dadosPessoais:', Object.values(dadosPessoais));
+    console.log('Valores em endereco:', Object.values(endereco));
+
+    if (!camposVaziosEmDados && !camposVaziosEmEndereco)
+      return toastSucesso();
+  }
 
   const toastSucesso = () => {
     toast.success("Cadastro realizado!", {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
   };
-  
+
   const toastFalha = () => {
     toast.error("Não foi possível cadastrar", {
       position: toast.POSITION.BOTTOM_RIGHT,
@@ -57,6 +75,21 @@ function Body() {
   };
 
   return (
+    <div>
+      <h1 className='cp-title'>Cadastramento</h1>
+      <form onSubmit={handleSubmit}>
+        <DadosPessoais handleDadosPessoaisChange={handleDadosPessoaisChange} />
+        <Endereco handleEnderecoChange={handleEnderecoChange} />
+        <div className="pc-button">
+          <button type='submit' onClick={checkFields}>Cadastrar</button>
+        </div>
+      </form>
+      <ToastContainer />
+    </div >
+  )
+}
+/*
+return (
     <div>
       <h1 className='cp-title'>Cadastramento</h1>
       <h3>Dados Pessoais:</h3>
@@ -82,7 +115,7 @@ function Body() {
               </div>
             </div>
           </div>
-          {EnderecoFields()}
+          {Endereco}
 
           <div className="pc-button">
             <button type='submit' onClick={handleCadastrarClick}>Cadastrar</button>
@@ -92,6 +125,5 @@ function Body() {
       </div >
     </div >
   )
-}
-
+*/
 export default CadastroPaciente;
