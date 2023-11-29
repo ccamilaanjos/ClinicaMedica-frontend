@@ -1,9 +1,7 @@
 import React from 'react';
-import Header from '../header'
 import './style.css';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import getData from './crud/get/index';
+import { useNavigate } from 'react-router-dom';
 
 function Pacientes() {
   return (
@@ -17,7 +15,7 @@ function Body() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    navigate('/pacientes/cadastrar');
+    return navigate('/pacientes/cadastrar');
   };
 
   return (
