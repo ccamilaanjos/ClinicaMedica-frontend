@@ -16,12 +16,14 @@ function App() {
       <Header />
       <Routes>
           <Route path='/' element={<Homepage />} />
-          
-          <Route exact path='/pacientes' element={<Pacientes />} />
-          <Route path='/pacientes/cadastrar' element={<CadastroPaciente />} />
-          
-          <Route exact path='/medicos' element={<Medicos />} />
-          <Route path='/medicos/cadastrar' element={<CadastroMedico />} />
+          <Route path='pacientes'>
+            <Route index={true} element={<Pacientes />}></Route>
+            <Route path='cadastrar' element={<CadastroPaciente />} />
+          </Route>
+          <Route path='medicos'>
+            <Route index={true} element={<Medicos />} />
+            <Route path='cadastrar' element={<CadastroMedico />} />
+          </Route>
           
           <Route exact path='/consultas' element={<Consultas />} />
         {/* <Route path="*" element={<Error/>}/> */}
