@@ -36,16 +36,25 @@ function getData() {
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>CPF</th>
-        </tr>
-      </thead>
-      {pacienteRow(pacientes)}
-    </table>
+    <>
+      {pacientes === null || pacientes.length === 0 ? (
+        <div>
+          <br></br><br></br>
+          <h2>Nenhum paciente cadastrado</h2>
+        </div>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>CPF</th>
+            </tr>
+          </thead>
+          {pacienteRow(pacientes)}
+        </table>
+      )}
+    </>
   )
 }
 

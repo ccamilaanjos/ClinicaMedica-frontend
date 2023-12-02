@@ -12,39 +12,47 @@ function getData() {
       setMedico(response.data["content"]);
     })
   }, []);
-  
+
   function medicoRow() {
     return (
       <>
-      <tbody>
-        {medicos.map(medico => (
-          <tr key={medico.crm}>
-            <td>{medico.nome}</td>
-            <td>{medico.email}</td>
-            <td>{medico.crm}</td>
-            <td>
-              <button className='update' type="button" onClick={() => alert(`Editar médico: ${medico.nome}`)}>Atualizar</button>
-            </td>
-            <td>
-              <button className='delete' type="button" onClick={() => alert(`Desativar médico: ${medico.nome}`)}>Desativar</button>
-            </td>
-          </tr>))}
-      </tbody>
+        <tbody>
+          {medicos.map(medico => (
+            <tr key={medico.crm}>
+              <td>{medico.nome}</td>
+              <td>{medico.email}</td>
+              <td>{medico.crm}</td>
+              <td>
+                <button className='update' type="button" onClick={() => alert(`Editar médico: ${medico.nome}`)}>Atualizar</button>
+              </td>
+              <td>
+                <button className='delete' type="button" onClick={() => alert(`Desativar médico: ${medico.nome}`)}>Desativar</button>
+              </td>
+            </tr>))}
+        </tbody>
       </>
     )
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>CRM</th>
-        </tr>
-      </thead>
-      {medicoRow(medicos)}
-    </table>
+    <>
+      {medicos === null || medicos.length === 0 ? (
+        <div>
+          <br></br><br></br>
+          <h2>Nenhum médico cadastrado</h2>
+        </div>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>CRM</th>
+            </tr>
+          </thead>
+          {medicoRow(medicos)}
+        </table>)}
+    </>
   )
 }
 
