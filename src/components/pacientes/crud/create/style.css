@@ -65,7 +65,7 @@ form .data-input span.details {
 }
 
 .data-input input[type="text"]:focus {
-  border-width: 2px; /* Aumentar a largura da borda quando em foco */
+  border-width: 2px;
 }
 
 form .pc-button {

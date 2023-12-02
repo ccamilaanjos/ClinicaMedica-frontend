@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from 'react';
 import DadosPessoais from './DadosPessoais';
+import API from '../../../api/api'
 
 function CadastroPaciente() {
   return (
@@ -12,6 +13,16 @@ function CadastroPaciente() {
       <Formulario />
     </div>
   )
+}
+
+function postData(pacienteBody) {
+  let url = 'paciente-ms/pacientes';
+
+  API.post(url, pacienteBody)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
 }
 
 function Formulario() {
@@ -33,7 +44,7 @@ function Formulario() {
   const [endereco, setEndereco] = useState({
     logradouro: '',
     bairro: '',
-    estado: '',
+    uf: '',
     cidade: '',
     cep: ''
   });
@@ -44,18 +55,20 @@ function Formulario() {
       ...endereco,
       [name]: value,
     });
+    console.log(name + " : " + value);
   };
 
-  const checkFields = () => {
+  const validFields = () => {
     const camposVaziosEmDados = Object.values(dadosPessoais).some((value) => value.trim() === '');
     const camposVaziosEmEndereco = Object.values(endereco).some((value) => value.trim() === '');
 
-    // acrescentar validação de requisição
     console.log('Valores em dadosPessoais:', Object.values(dadosPessoais));
     console.log('Valores em endereco:', Object.values(endereco));
 
     if (!camposVaziosEmDados && !camposVaziosEmEndereco)
-      return toastSucesso();
+      return true;
+    
+    return false;
   }
 
   const toastSucesso = () => {
@@ -72,7 +85,35 @@ function Formulario() {
 
   const handleSubmit = event => {
     event.preventDefault();
+    processForm();
   };
+
+  function processForm() {
+    let camposValidos = validFields();
+
+    if (camposValidos) {
+      const body = {
+        "nome": dadosPessoais.nome,
+        "email": dadosPessoais.email,
+        "cpf": dadosPessoais.cpf,
+        "telefone": dadosPessoais.telefone,
+        "endereco": {
+          "logradouro": endereco.logradouro,
+          "numero": "s/n",
+          "complemento": "",
+          "bairro": endereco.bairro,
+          "cidade": endereco.cidade,
+          "uf": endereco.uf,
+          "cep": endereco.cep
+        }
+      }
+
+      postData(body);
+      return toastSucesso();
+    }
+
+    return toastFalha();
+  }
 
   return (
     <div>
@@ -81,49 +122,12 @@ function Formulario() {
         <DadosPessoais handleDadosPessoaisChange={handleDadosPessoaisChange} />
         <Endereco handleEnderecoChange={handleEnderecoChange} />
         <div className="pc-button">
-          <button type='submit' onClick={checkFields}>Cadastrar</button>
+          <button type='submit'>Cadastrar</button>
         </div>
       </form>
       <ToastContainer />
     </div >
   )
 }
-/*
-return (
-    <div>
-      <h1 className='cp-title'>Cadastramento</h1>
-      <h3>Dados Pessoais:</h3>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div className="user-details">
-            <div className='input-row'>
-              <div className="data-input">
-                <span className="details">Nome completo <span className='obgt'>*</span></span>
-                <input type="text" name='nome' placeholder="Digite o nome" onChange={handleInputChange} required />
-              </div>
-              <div className="data-input">
-                <span className="details">Email <span className='obgt'>*</span></span>
-                <input type="text" name='email' placeholder="Digite o email" onChange={handleInputChange} required />
-              </div>
-              <div className="data-input">
-                <span className="details">Telefone <span className='obgt'>*</span></span>
-                <input type="text" name='telefone' placeholder="(99) 99999-9999" onChange={handleInputChange} required />
-              </div>
-              <div className="data-input">
-                <span className="details">CPF <span className='obgt'>*</span></span>
-                <input type="text" name='cpf' size="9" maxLength="11" placeholder="xxx.xxx.xxx-xx" onChange={handleInputChange} required />
-              </div>
-            </div>
-          </div>
-          {Endereco}
 
-          <div className="pc-button">
-            <button type='submit' onClick={handleCadastrarClick}>Cadastrar</button>
-          </div>
-          <ToastContainer />
-        </form>
-      </div >
-    </div >
-  )
-*/
 export default CadastroPaciente;
