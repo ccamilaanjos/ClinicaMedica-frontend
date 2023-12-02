@@ -1,4 +1,5 @@
 import React from "react";
+import InputMask from 'react-input-mask';
 
 const DadosPessoais = ({ handleDadosPessoaisChange, especialidades }) => {
 
@@ -10,19 +11,19 @@ const DadosPessoais = ({ handleDadosPessoaisChange, especialidades }) => {
           <div className='input-row'>
             <div className="data-input">
               <span className="details">Nome completo <span className='obgt'>*</span></span>
-              <input type="text" name='nome' placeholder="Digite o nome" onChange={handleDadosPessoaisChange} required />
+              <InputMask placeholder="Digite o nome" name='nome' onChange={handleDadosPessoaisChange} required />
             </div>
             <div className="data-input">
               <span className="details">Email <span className='obgt'>*</span></span>
-              <input type="text" name='email' placeholder="Digite o email" onChange={handleDadosPessoaisChange} required />
+              <InputMask placeholder="exemplo@dominio.com" name="email" onChange={handleDadosPessoaisChange} required/>
             </div>
             <div className="data-input">
               <span className="details">Telefone <span className='obgt'>*</span></span>
-              <input type="text" name='telefone' placeholder="(99) 99999-9999" onChange={handleDadosPessoaisChange} required />
+              <InputMask mask="(99) 9999-9999" maskChar="_" placeholder="(99) 99999-9999" name="telefone" onChange={handleDadosPessoaisChange} required />
             </div>
             <div className="data-input">
               <span className="details">CRM <span className='obgt'>*</span></span>
-              <input type="text" name='crm' size="9" minLength="4" maxLength="13" placeholder="xxxxxxxxxx/UF" onChange={handleDadosPessoaisChange} required />
+              <InputMask placeholder="123456/UF" name="crm" onChange={handleDadosPessoaisChange} required />
             </div>
             <div className="data-input">
               <span className="details">Especialidade <span className='obgt'>*</span></span>
