@@ -76,6 +76,21 @@ form .pc-button {
   display: block;
 }
 
+.select-especialidade, input {
+  width: calc(100% - 8px);
+  height: 40px;
+  width: 90%;
+  box-sizing: border-box;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.select-especialidade option {
+  font-size: 16px;
+}
+
 .pc-button button[type="submit"] {
   height: 100%;
   width: 100%;
