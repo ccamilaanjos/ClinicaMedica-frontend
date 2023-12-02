@@ -18,7 +18,7 @@ const DadosPessoais = ({ handleDadosPessoaisChange }) => {
             </div>
             <div className="data-input">
               <span className="details">Telefone <span className='obgt'>*</span></span>
-              <InputMask mask="(99) 9999-9999" maskChar="_" placeholder="(99) 99999-9999" name="telefone" onChange={handleDadosPessoaisChange} required />
+              <InputMask mask="(99) 99999-9999" maskChar="_" placeholder="(99) 99999-9999" name="telefone" onChange={handleDadosPessoaisChange} required />
             </div>
             <div className="data-input">
               <span className="details">CPF <span className='obgt'>*</span></span>
