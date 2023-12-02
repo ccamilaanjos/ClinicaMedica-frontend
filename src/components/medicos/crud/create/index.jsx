@@ -13,26 +13,58 @@ function CadastroMedico() {
     </div>
   )
 }
+const toastSucesso = () => {
+  toast.success("Cadastro realizado!", {
+    position: toast.POSITION.BOTTOM_RIGHT,
+  });
+};
+
+const toastFalha = (message) => {
+  toast.error("Não foi possível cadastrar: " + message, {
+    position: toast.POSITION.BOTTOM_RIGHT,
+  });
+}
 
 function postData(medicoBody) {
   let url = 'medico-ms/medicos';
 
-  API.post(url, medicoBody)
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-    })
+  try {
+    API.post(url, medicoBody)
+      .then(res => {
+        if (res.status == 201) {
+          return toastSucesso();
+        }
+      })
+      .catch(error => {
+        console.error('Erro na requisição: ', error);
+        return toastFalha(error);
+      });
+  } catch (error) {
+    console.error('Erro: ', error);
+    return toastErro(error);
+  }
 }
 
 function Formulario() {
   const [especialidades, setEspecialidades] = useState([]);
 
   useEffect(() => {
-    let url = 'medico-ms/especialidades/todas';
-    API.get(url).then((response) => {
-      const titulos = response.data.map(especialidade => especialidade.titulo);
-      setEspecialidades(titulos)
-    })
+    const fetchData = async () => {
+      try {
+        let url = 'medico-ms/especialidades/todas';
+        const response = await API.get(url);
+        const titulos = response.data.map(especialidade => especialidade.titulo);
+        setEspecialidades(titulos);
+      } catch (error) {
+        console.error('Erro na requisição: ', error);
+
+        return toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    };
+
+    fetchData();
 
   }, []);
 
@@ -78,18 +110,6 @@ function Formulario() {
     return false;
   }
 
-  const toastSucesso = () => {
-    toast.success("Cadastro realizado!", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-    });
-  };
-
-  const toastFalha = () => {
-    toast.error("Não foi possível cadastrar", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-    });
-  }
-
   const handleSubmit = event => {
     event.preventDefault();
     processForm();
@@ -117,10 +137,7 @@ function Formulario() {
       }
 
       postData(body);
-      return toastSucesso();
     }
-
-    return toastFalha();
   }
 
   return (

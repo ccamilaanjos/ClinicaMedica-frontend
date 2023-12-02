@@ -17,7 +17,7 @@ const Endereco = ({ handleEnderecoChange }) => {
           </div>
           <div className="data-input">
             <span className="details">Complemento</span>
-            <input type="text" name='complemento' />
+            <input type="text" name='complemento'  placeholder="Ex.: Bloco, apartamento, casa" />
           </div>
           <div className="data-input">
             <span className="details">Bairro <span className='obgt'>*</span></span>

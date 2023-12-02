@@ -1,16 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import API from '../../../api/api'
+import API from '../../../api/api';
+import { ToastContainer, toast } from "react-toastify";
+
+const toastErro = () => {
+  toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
+    position: toast.POSITION.TOP_RIGHT,
+  });
+}
 
 // Tabela com todos os médicos ativos
 function getData() {
   const [medicos, setMedico] = useState([])
 
   useEffect(() => {
-    let url = 'medico-ms/medicos/ativos?page=0';
+    const fetchData = async () => {
+      try {
+        let url = 'medico-ms/medicos/ativos?page=0';
+        const response = await API.get(url);
+        if (response.status != 200) {
+          return toastErro;
+        }
+        setMedico(response.data["content"]);
+      } catch (error) {
+        console.error('Erro na requisição: ', error);
+        return toastErro();
+      }
+    };
 
-    API.get(url).then((response) => {
-      setMedico(response.data["content"]);
-    })
+    fetchData();
   }, []);
 
   function medicoRow() {
@@ -40,6 +57,7 @@ function getData() {
         <div>
           <br></br><br></br>
           <h2>Nenhum médico cadastrado</h2>
+          <ToastContainer />
         </div>
       ) : (
         <table>
