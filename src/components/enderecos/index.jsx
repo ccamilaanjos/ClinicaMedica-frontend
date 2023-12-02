@@ -1,4 +1,5 @@
 import React from "react";
+import InputMask from 'react-input-mask';
 import './style.css';
 
 const Endereco = ({ handleEnderecoChange }) => {
@@ -61,7 +62,7 @@ const Endereco = ({ handleEnderecoChange }) => {
           </div>
           <div className="data-input">
             <span className="details">CEP <span className='obgt'>*</span></span>
-            <input type="text" name='cep' placeholder="xx.xxx-xxx" maxLength="8" onChange={handleEnderecoChange} required />
+            <InputMask mask="99999-999" maskChar="_" placeholder="99999-999" name="cep" onChange={handleEnderecoChange} required />
           </div>
       </div>
     </div>
