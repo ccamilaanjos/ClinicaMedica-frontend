@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import API from '../../../api/api'
+import removeData from '../delete';
 
 // Tabela com todos os pacientes ativos
 function getData() {
@@ -27,7 +28,8 @@ function getData() {
                 <button className='update' type="button" onClick={() => alert(`Editar paciente: ${paciente.nome}`)}>Atualizar</button>
               </td>
               <td>
-                <button className='delete' type="button" onClick={() => alert(`Desativar paciente: ${paciente.nome}`)}>Desativar</button>
+                <button className='delete' type="button"
+                onClick={() => removeData({ setPaciente, pacientes, cpf: paciente.cpf })}>Desativar</button>
               </td>
             </tr>))}
         </tbody>
