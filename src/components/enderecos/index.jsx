@@ -24,7 +24,7 @@ const Endereco = ({ handleEnderecoChange }) => {
           </div>
           <div className="data-input">
             <span className="details">Estado <span className='obgt'>*</span></span>
-            <select className="select-estado" defaultValue="" name='estado' onChange={handleEnderecoChange} required>
+            <select className="select-estado" defaultValue="" name='uf' onChange={handleEnderecoChange} required>
               <option value="" disabled hidden>Selecione uma opção</option>
               <option value="ac">Acre</option>
               <option value="al">Alagoas</option>
