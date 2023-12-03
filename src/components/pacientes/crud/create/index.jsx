@@ -16,13 +16,33 @@ function CadastroPaciente() {
 }
 
 function postData(pacienteBody) {
+  let toastId = null;
   let url = 'paciente-ms/pacientes';
+
+  if (!toastId) {
+    toastId = toast.loading("Cadastrando...", { autoClose: false });
+  }
 
   API.post(url, pacienteBody)
     .then(res => {
-      console.log(res);
-      console.log(res.data);
+      if (res.status == 201) {
+        toast.update(toastId, {
+          render: "Paciente cadastrado!",
+          isLoading: false,
+          type: "success",
+          autoClose: true
+        });
+      }
     })
+    .catch(error => {
+      const errorMessage = ": " + error.response?.data?.message || "";
+      toast.update(toastId, {
+        render: "Não foi possível cadastrar" + errorMessage,
+        isLoading: false,
+        type: "error",
+        autoClose: true
+      });
+    });
 }
 
 function Formulario() {
@@ -55,32 +75,16 @@ function Formulario() {
       ...endereco,
       [name]: value,
     });
-    console.log(name + " : " + value);
   };
 
   const validFields = () => {
     const camposVaziosEmDados = Object.values(dadosPessoais).some((value) => value.trim() === '');
     const camposVaziosEmEndereco = Object.values(endereco).some((value) => value.trim() === '');
 
-    console.log('Valores em dadosPessoais:', Object.values(dadosPessoais));
-    console.log('Valores em endereco:', Object.values(endereco));
-
     if (!camposVaziosEmDados && !camposVaziosEmEndereco)
       return true;
-    
+
     return false;
-  }
-
-  const toastSucesso = () => {
-    toast.success("Cadastro realizado!", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-    });
-  };
-
-  const toastFalha = () => {
-    toast.error("Não foi possível cadastrar", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-    });
   }
 
   const handleSubmit = event => {
@@ -109,10 +113,7 @@ function Formulario() {
       }
 
       postData(body);
-      return toastSucesso();
     }
-
-    return toastFalha();
   }
 
   return (

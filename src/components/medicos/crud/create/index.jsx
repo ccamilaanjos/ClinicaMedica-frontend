@@ -13,36 +13,34 @@ function CadastroMedico() {
     </div>
   )
 }
-const toastSucesso = () => {
-  toast.success("Cadastro realizado!", {
-    position: toast.POSITION.BOTTOM_RIGHT,
-  });
-};
-
-const toastFalha = (message) => {
-  toast.error("Não foi possível cadastrar: " + message, {
-    position: toast.POSITION.BOTTOM_RIGHT,
-  });
-}
 
 function postData(medicoBody) {
+  let toastId = null;
   let url = 'medico-ms/medicos';
 
-  try {
-    API.post(url, medicoBody)
-      .then(res => {
-        if (res.status == 201) {
-          return toastSucesso();
-        }
-      })
-      .catch(error => {
-        console.error('Erro na requisição: ', error);
-        return toastFalha(error);
-      });
-  } catch (error) {
-    console.error('Erro: ', error);
-    return toastErro(error);
+  if (!toastId) {
+    toastId = toast.loading("Cadastrando...", { autoClose: false });
   }
+  API.post(url, medicoBody)
+    .then(res => {
+      if (res.status == 201) {
+        toast.update(toastId, {
+          render: "Médico cadastrado!",
+          isLoading: false,
+          type: "success",
+          autoClose: true
+        });
+      }
+    })
+    .catch(error => {
+      const errorMessage = ": " + error.response?.data?.message || "";
+      toast.update(toastId, {
+        render: "Não foi possível cadastrar" + errorMessage,
+        isLoading: false,
+        type: "error",
+        autoClose: true
+      });
+    });
 }
 
 function Formulario() {
@@ -55,9 +53,9 @@ function Formulario() {
         const response = await API.get(url);
         const titulos = response.data.map(especialidade => especialidade.titulo);
         setEspecialidades(titulos);
+
       } catch (error) {
         console.error('Erro na requisição: ', error);
-
         return toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
           position: toast.POSITION.TOP_RIGHT,
         });

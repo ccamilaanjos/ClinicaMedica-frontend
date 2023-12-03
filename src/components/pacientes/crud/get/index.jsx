@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import API from '../../../api/api'
 import removeData from '../delete';
+import { toast } from 'react-toastify';
+
+const toastErro = () => {
+  toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
+    position: toast.POSITION.TOP_RIGHT,
+  });
+}
 
 // Tabela com todos os pacientes ativos
 function getData() {
 
   const [pacientes, setPaciente] = useState([])
+  
+   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let url = 'paciente-ms/pacientes/ativos?page=0';
+        const response = await API.get(url);
+        if (response.status != 200) {
+          return toastErro();
+        }
+        setPaciente(response.data["content"]);
+      } catch (error) {
+        console.error('Erro na requisição: ', error);
+        return toastErro();
+      }
+    };
 
-  useEffect(() => {
-    let url = 'paciente-ms/pacientes/ativos?page=0';
-
-    API.get(url).then((response) => {
-      setPaciente(response.data["content"]);
-    })
+    fetchData();
   }, []);
 
   function pacienteRow() {

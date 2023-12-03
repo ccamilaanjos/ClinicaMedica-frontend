@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import getData from './crud/get/index';
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer } from "react-toastify";
+import { ToastContainer } from 'react-toastify';
 
 function Pacientes() {
   return (
@@ -16,7 +16,7 @@ function Body() {
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    return navigate('/pacientes/cadastrar');
+    return navigate('cadastrar');
   };
 
   return (

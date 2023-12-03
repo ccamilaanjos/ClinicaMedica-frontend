@@ -2,6 +2,7 @@ import React from 'react';
 import './style.css';
 import getData from './crud/get/index';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 function Medicos() {
   return (
@@ -20,6 +21,7 @@ function Body() {
 
   return (
     <div className='m-container'>
+      <ToastContainer />
       <h1 className='medicos-title'>Médicos</h1>
       <div>
         <div>
