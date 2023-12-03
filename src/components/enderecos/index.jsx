@@ -13,11 +13,11 @@ const Endereco = ({ handleEnderecoChange }) => {
           </div>
           <div className="data-input">
             <span className="details">Número</span>
-            <input type="text" name='numero' />
+            <input type="text" name='numero' onChange={handleEnderecoChange} />
           </div>
           <div className="data-input">
             <span className="details">Complemento</span>
-            <input type="text" name='complemento'  placeholder="Ex.: Bloco, apartamento, casa" />
+            <input type="text" name='complemento' placeholder="Ex.: Bloco, apartamento, casa" onChange={handleEnderecoChange}/>
           </div>
           <div className="data-input">
             <span className="details">Bairro <span className='obgt'>*</span></span>

@@ -87,8 +87,18 @@ function Formulario() {
     bairro: '',
     uf: '',
     cidade: '',
-    cep: ''
+    cep: '',
+    complemento: '',
+    numero: ''
   });
+  
+   const enderecoObrigatorio = {
+    logradouro: endereco.logradouro,
+    bairro: endereco.bairro,
+    uf: endereco.uf,
+    cidade: endereco.cidade,
+    cep: endereco.cep,
+  }
 
   const handleEnderecoChange = (event) => {
     const { name, value } = event.target;
@@ -100,7 +110,7 @@ function Formulario() {
 
   const validFields = () => {
     const camposVaziosEmDados = Object.values(dadosPessoais).some((value) => value.trim() === '');
-    const camposVaziosEmEndereco = Object.values(endereco).some((value) => value.trim() === '');
+    const camposVaziosEmEndereco = Object.values(enderecoObrigatorio).some((value) => value.trim() === '');
 
     if (!camposVaziosEmDados && !camposVaziosEmEndereco)
       return true;
@@ -123,8 +133,8 @@ function Formulario() {
         "telefone": dadosPessoais.telefone,
         "endereco": {
           "logradouro": endereco.logradouro,
-          "numero": "s/n",
-          "complemento": "",
+          "numero": endereco.numero,
+          "complemento": endereco.complemento,
           "bairro": endereco.bairro,
           "cidade": endereco.cidade,
           "uf": endereco.uf,
@@ -133,7 +143,6 @@ function Formulario() {
         "crm": dadosPessoais.crm,
         "especialidade": dadosPessoais.especialidade
       }
-
       postData(body);
     }
   }
