@@ -1,4 +1,4 @@
-import API from '../../../api/api';
+import API from '/src/api';
 import { toast } from "react-toastify";
 
 function removeData({ setPaciente, pacientes, cpf }) {

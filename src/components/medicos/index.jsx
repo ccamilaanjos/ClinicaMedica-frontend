@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import getData from './crud/get/index';
+import getData from './crud/get';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import './style.css';
-import Endereco from '../../../enderecos/index';
+import Endereco from '/src/components/Formularios/enderecos';
+import DadosPessoais from '/src/components/Formularios/dados/dados-paciente';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from 'react';
-import DadosPessoais from './DadosPessoais';
-import API from '../../../api/api'
+import API from '/src/api';
 
 function CadastroPaciente() {
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import API from '../../../api/api'
+import API from '/src/api';
 import removeData from '../delete';
 import { toast } from 'react-toastify';
 
