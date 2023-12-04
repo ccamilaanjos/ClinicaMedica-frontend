@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import API from '/src/api';
 import { toast } from "react-toastify";
 import removeData from '../delete';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const toastErro = () => {
   toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
@@ -10,7 +11,13 @@ const toastErro = () => {
 }
 
 // Tabela com todos os médicos ativos
-function getData() {
+function getData(especialidades) {
+  const navigate = useNavigate();
+
+  const atualizar = (crm) => {
+    return navigate(`atualizar/${crm}`, { state: { especialidades: especialidades } });
+  };
+
   const [medicos, setMedico] = useState([])
 
   useEffect(() => {
@@ -43,11 +50,12 @@ function getData() {
               <td>{medico.especialidade}</td>
               <td>
                 <button className='update' type="button"
-                onClick={() => alert(`Editar médico: ${medico.nome}`)}>Atualizar</button>
+                  onClick={
+                    () => { atualizar(medico.crm) }}>Atualizar</button>
               </td>
               <td>
                 <button className='delete' type="button"
-                onClick={() => removeData({ setMedico, medicos, crm: medico.crm })}>Desativar</button>
+                  onClick={() => removeData({ setMedico, medicos, crm: medico.crm })}>Desativar</button>
               </td>
             </tr>))}
         </tbody>

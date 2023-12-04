@@ -9,6 +9,7 @@ import CadastroMedico from './components/Medicos/crud/create';
 import Header from './components/header';
 import AtualizacaoPaciente from './components/Pacientes/crud/update';
 import NotFound from './components/NotFound';
+import AtualizacaoMedico from './components/Medicos/crud/update';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='medicos'>
           <Route index={true} element={<Medicos />} />
           <Route path='cadastrar' element={<CadastroMedico />} />
+          <Route path='atualizar/:crm' element={<AtualizacaoMedico />} />
         </Route>
 
         <Route exact path='/consultas' element={<Consultas />} />

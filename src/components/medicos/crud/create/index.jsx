@@ -3,7 +3,8 @@ import Endereco from '/src/components/Formularios/enderecos';
 import DadosPessoais from '/src/components/Formularios/dados/dados-medico';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import API from '/src/api';
 
 function CadastroMedico() {
@@ -21,6 +22,7 @@ function postData(medicoBody) {
   if (!toastId) {
     toastId = toast.loading("Cadastrando...", { autoClose: false });
   }
+  
   API.post(url, medicoBody)
     .then(res => {
       if (res.status == 201) {
@@ -44,27 +46,8 @@ function postData(medicoBody) {
 }
 
 function Formulario() {
-  const [especialidades, setEspecialidades] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let url = 'medico-ms/especialidades/todas';
-        const response = await API.get(url);
-        const titulos = response.data.map(especialidade => especialidade.titulo);
-        setEspecialidades(titulos);
-
-      } catch (error) {
-        console.error('Erro na requisição: ', error);
-        return toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      }
-    };
-
-    fetchData();
-
-  }, []);
+  const location = useLocation();
+  const especialidades = location.state.especialidades;
 
   const [dadosPessoais, setDadosPessoais] = useState({
     nome: '',
@@ -151,8 +134,8 @@ function Formulario() {
     <div>
       <h1 className='cp-title'>Cadastramento</h1>
       <form onSubmit={handleSubmit}>
-        <DadosPessoais handleDadosPessoaisChange={handleDadosPessoaisChange} especialidades={especialidades} />
-        <Endereco handleEnderecoChange={handleEnderecoChange} />
+        <DadosPessoais handleDadosPessoaisChange={handleDadosPessoaisChange} especialidades={especialidades} dataFill={null} />
+        <Endereco handleEnderecoChange={handleEnderecoChange} dataFill={null} />
         <div className="pc-button">
           <button type='submit'>Cadastrar</button>
         </div>

@@ -1,8 +1,9 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import './style.css';
 import getData from './crud/get';
+import API from '../../api'
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 function Medicos() {
   return (
@@ -12,11 +13,33 @@ function Medicos() {
   )
 }
 
-function Body() {  
+function Body() {
+  const [especialidades, setEspecialidades] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let url = 'medico-ms/especialidades/todas';
+        const response = await API.get(url);
+        const titulos = response.data.map(especialidade => especialidade.titulo);
+        setEspecialidades(titulos);
+
+      } catch (error) {
+        console.error('Erro na requisição: ', error);
+        return toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    };
+
+    fetchData();
+
+  }, []);
+
   const navigate = useNavigate();
 
   const cadastrar = () => {
-    return navigate('cadastrar');
+    return navigate('cadastrar', { state: { especialidades: especialidades } });
   };
 
   return (
@@ -25,13 +48,13 @@ function Body() {
       <h1 className='medicos-title'>Médicos</h1>
       <div>
         <div>
-        <button className='cadastrar' type='button'
-          onClick={cadastrar}>
-          Cadastrar novo médico
-        </button>
+          <button className='cadastrar' type='button'
+            onClick={cadastrar}>
+            Cadastrar novo médico
+          </button>
         </div>
         <div className='medicos-table'>
-          {getData()}
+          {getData(especialidades)}
         </div>
       </div>
       <div className='empty'>
