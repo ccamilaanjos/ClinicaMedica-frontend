@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import API from '/src/api';
 import removeData from '../delete';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const toastErro = () => {
   toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
@@ -11,10 +12,15 @@ const toastErro = () => {
 
 // Tabela com todos os pacientes ativos
 function getData() {
+  const navigate = useNavigate();
+
+  const atualizar = (cpf) => {
+    return navigate(`atualizar/${cpf}`);
+  };
 
   const [pacientes, setPaciente] = useState([])
-  
-   useEffect(() => {
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         let url = 'paciente-ms/pacientes/ativos?page=0';
@@ -33,6 +39,7 @@ function getData() {
   }, []);
 
   function pacienteRow() {
+
     return (
       <>
         <tbody>
@@ -42,11 +49,13 @@ function getData() {
               <td>{paciente.email}</td>
               <td>{paciente.cpf}</td>
               <td>
-                <button className='update' type="button" onClick={() => alert(`Editar paciente: ${paciente.nome}`)}>Atualizar</button>
+                <button className='update' type="button"
+                  onClick={
+                  () => { atualizar(paciente.cpf) }}>Atualizar</button>
               </td>
               <td>
                 <button className='delete' type="button"
-                onClick={() => removeData({ setPaciente, pacientes, cpf: paciente.cpf })}>Desativar</button>
+                  onClick={() => removeData({ setPaciente, pacientes, cpf: paciente.cpf })}>Desativar</button>
               </td>
             </tr>))}
         </tbody>

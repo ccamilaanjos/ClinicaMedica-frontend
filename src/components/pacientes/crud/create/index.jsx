@@ -129,8 +129,8 @@ function Formulario() {
     <div>
       <h1 className='cp-title'>Cadastramento</h1>
       <form onSubmit={handleSubmit}>
-        <DadosPessoais handleDadosPessoaisChange={handleDadosPessoaisChange} />
-        <Endereco handleEnderecoChange={handleEnderecoChange} />
+        <DadosPessoais handleDadosPessoaisChange={handleDadosPessoaisChange} dataFill={null} />
+        <Endereco handleEnderecoChange={handleEnderecoChange} dataFill={null}/>
         <div className="pc-button">
           <button type='submit'>Cadastrar</button>
         </div>
