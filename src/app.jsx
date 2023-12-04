@@ -1,34 +1,35 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { Route } from 'react-router-dom';
-import { Routes } from 'react-router-dom';
-import Homepage from './components/homepage/index.jsx';
-import Pacientes from './components/pacientes/index.jsx';
-import Medicos from './components/medicos/index.jsx';
-import Consultas from './components/consultas/index.jsx';
-import CadastroPaciente from './components/pacientes/crud/create/index.jsx';
-import CadastroMedico from './components/medicos/crud/create/index.jsx';
-import Header from './components/header/index.jsx';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import Homepage from './components/homepage';
+import Pacientes from './components/Pacientes';
+import Medicos from './components/Medicos';
+import Consultas from './components/Consultas';
+import CadastroPaciente from './components/Pacientes/crud/create';
+import CadastroMedico from './components/Medicos/crud/create';
+import Header from './components/header';
+import AtualizacaoPaciente from './components/Pacientes/crud/update';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Header />
       <Routes>
-          <Route path='/' element={<Homepage />} />
-          <Route path='pacientes'>
-            <Route index={true} element={<Pacientes />}></Route>
-            <Route path='cadastrar' element={<CadastroPaciente />} />
-          </Route>
-          <Route path='medicos'>
-            <Route index={true} element={<Medicos />} />
-            <Route path='cadastrar' element={<CadastroMedico />} />
-          </Route>
-          
-          <Route exact path='/consultas' element={<Consultas />} />
-        {/* <Route path="*" element={<Error/>}/> */}
+        <Route exact path='/' element={<Homepage />} />
+        <Route path='pacientes'>
+          <Route index={true} element={<Pacientes />}></Route>
+          <Route path='cadastrar' element={<CadastroPaciente />} />
+          <Route path='atualizar/:cpf' element={<AtualizacaoPaciente />} />
+        </Route>
+        <Route path='medicos'>
+          <Route index={true} element={<Medicos />} />
+          <Route path='cadastrar' element={<CadastroMedico />} />
+        </Route>
+
+        <Route exact path='/consultas' element={<Consultas />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
