@@ -62,7 +62,7 @@ const DadosPessoais = ({ handleDadosPessoaisChange, especialidades, dataFill }) 
             <div className="data-input">
               <span className="details">CRM <span className='obgt'>*</span></span>
               <InputMask
-                placeholder="123456/UF"
+                placeholder="123456-UF"
                 name="crm"
                 defaultValue={isUpdate ? dataFill.crm : ""}
                 onChange={handleDadosPessoaisChange}
