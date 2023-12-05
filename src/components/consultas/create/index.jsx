@@ -14,19 +14,19 @@ function MarcacaoConsulta() {
   )
 }
 
-function postData(medicoBody) {
+function postData(consultaBody) {
   let toastId = null;
-  let url = 'medico-ms/medicos';
+  let url = 'consulta-ms/consultas/marcar';
 
   if (!toastId) {
-    toastId = toast.loading("Cadastrando...", { autoClose: false });
+    toastId = toast.loading("Carregando...", { autoClose: false });
   }
 
-  API.post(url, medicoBody)
+  API.post(url, consultaBody)
     .then(res => {
       if (res.status == 201) {
         toast.update(toastId, {
-          render: "Médico cadastrado!",
+          render: "Consulta marcada!",
           isLoading: false,
           type: "success",
           autoClose: true
@@ -36,7 +36,7 @@ function postData(medicoBody) {
     .catch(error => {
       const errorMessage = ": " + error.response?.data?.message || "";
       toast.update(toastId, {
-        render: "Não foi possível cadastrar" + errorMessage,
+        render: "Não foi possível marcar" + errorMessage,
         isLoading: false,
         type: "error",
         autoClose: true
@@ -49,29 +49,32 @@ function Formulario() {
   const especialidades = location.state.especialidades;
 
   const [dados, setDados] = useState({
-    nome: '',
-    email: '',
-    telefone: '',
-    crm: '',
-    especialidade: ''
+    "cpf": '',
+    "crm": '',
+    "especialidade": '',
+    "horario": '',
+    "data": ''
   });
 
   const handleDadosChange = (event) => {
     const { name, value } = event.target;
+    const hhFormat = name === 'horario' ? value + ':00' : value;
+    const ddFormat = name === 'data' ? formatDate(hhFormat) : hhFormat;
+    const camposAjsutados = ddFormat;
+
     setDados({
       ...dados,
-      [name]: value,
+      [name]: camposAjsutados,
     });
+    
+    console.log(name + " : " + value)
+
   };
-
-  const validFields = () => {
-    const camposVaziosEmDados = Object.values(dados).some((value) => value.trim() === '');
-
-    if (!camposVaziosEmDados)
-      return true;
-
-    return false;
-  }
+  
+  function formatDate(data) {
+  const d = data.split('/');
+  return `${d[2]}-${d[1]}-${d[0]}`;
+}
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -79,25 +82,25 @@ function Formulario() {
   };
 
   function processForm() {
-    let camposValidos = validFields();
+    // let camposValidos = validFields();
 
-    if (camposValidos) {
-      const body = {
-        "cpf": dados.cpf,
-        "crm": dados.crm || "",
-        "especialidade": dados.especialidade,
-        "horario": dados.horario,
-        "data": dados.data
-      }
-      postData(body);
+    // if (camposValidos) {
+    const body = {
+      "cpf": dados.cpf,
+      "crm": dados.crm || "",
+      "especialidade": dados.especialidade,
+      "horario": dados.horario,
+      "data": dados.data
     }
+    postData(body);
+    // }
   }
 
   return (
     <div>
-      <h1 className='cp-title'>Marcação</h1>
+      <h1 className='c-title'>Marcação</h1>
       <form onSubmit={handleSubmit}>
-        <DadosConsulta handleDadosChange={handleDadosChange} especialidades={especialidades}/>
+        <DadosConsulta handleConsultaChange={handleDadosChange} especialidades={especialidades} />
         <div className="pc-button">
           <button type='submit'>Cadastrar</button>
         </div>
