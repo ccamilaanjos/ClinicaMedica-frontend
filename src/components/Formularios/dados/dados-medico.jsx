@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import InputMask from 'react-input-mask';
+import '../style.css';
 
 const DadosPessoais = ({ handleDadosPessoaisChange, especialidades, dataFill }) => {
   const isUpdate = dataFill != null;

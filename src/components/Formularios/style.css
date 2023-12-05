@@ -1,0 +1,66 @@
+:root {
+  --primary-color: rgb(34, 139, 118);
+  --primary-font: Verdana;
+}
+
+.obgt {
+  color: red;
+}
+
+.data-input {
+  margin-right: 10px; /* Espaçamento entre os campos */
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column; 
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: 20px;
+  padding-top: 20px;
+}
+
+.user-details .data-input {
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 30px);
+}
+
+form .data-input span.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.data-input input {
+  height: 40px;
+  width: 90%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.data-input input[type="text"] {
+  border: 1px solid black;
+  padding-left: 8px;
+  transition: border-width 0s ease;
+}
+
+.data-input input[type="text"]:focus {
+  border-width: 2px;
+}
+
+.select-especialidade, input {
+  width: calc(100% - 8px);
+  height: 40px;
+  width: 90%;
+  box-sizing: border-box;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.select-especialidade option {
+  font-size: 16px;
+}

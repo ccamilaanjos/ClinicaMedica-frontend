@@ -1,5 +1,5 @@
-import React from "react";
 import InputMask from 'react-input-mask';
+import '../style.css';
 
 const DadosPessoais = ({ handleDadosPessoaisChange, dataFill }) => {
   const isUpdate = dataFill != null;
@@ -47,6 +47,7 @@ const DadosPessoais = ({ handleDadosPessoaisChange, dataFill }) => {
                 mask={isUpdate ? null : "999.999.999-99"}
                 maskChar="_"
                 placeholder="123.456.789-01"
+                pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
                 name="cpf"
                 defaultValue={isUpdate ? dataFill.cpf : ""}
                 onChange={handleDadosPessoaisChange}
