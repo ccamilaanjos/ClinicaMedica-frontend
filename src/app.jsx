@@ -1,15 +1,16 @@
 import React from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import Homepage from './components/homepage';
+import Header from './components/header';
 import Pacientes from './components/Pacientes';
 import Medicos from './components/Medicos';
-import Consultas from './components/Consultas';
 import CadastroPaciente from './components/Pacientes/crud/create';
 import CadastroMedico from './components/Medicos/crud/create';
-import Header from './components/header';
 import AtualizacaoPaciente from './components/Pacientes/crud/update';
-import NotFound from './components/NotFound';
 import AtualizacaoMedico from './components/Medicos/crud/update';
+import Consultas from './components/Consultas';
+import MarcacaoConsulta from './components/Consultas/create';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
@@ -27,8 +28,11 @@ function App() {
           <Route path='cadastrar' element={<CadastroMedico />} />
           <Route path='atualizar/:crm' element={<AtualizacaoMedico />} />
         </Route>
-
-        <Route exact path='/consultas' element={<Consultas />} />
+        <Route path='/consultas'>
+          <Route index={true} element={<Consultas />} />
+          <Route path='marcar' element={<MarcacaoConsulta />} />
+          {/* <Route path='cancelar/:id' element={<MarcacaoConsulta />} /> */}
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </HashRouter>
