@@ -13,62 +13,15 @@ h3 {
 
 .input-row {
   display: flex;
-  margin-bottom: 10px; /* Espaçamento entre as linhas */
+  margin-bottom: 10px;
 }
 
-.data-input {
-  margin-right: 10px; /* Espaçamento entre os campos */
-}
-
-.cp-title{
+.mp-title{
     font-size: 28px;
     margin: 40px 0px 40px 120px;
 }
 
-.user-details {
-  display: flex;
-  flex-direction: column; 
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  margin: 20px;
-  padding-top: 20px;
-}
-
-.user-details .data-input {
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 30px);
-}
-
-.obgt {
-  color: red;
-}
-
-form .data-input span.details {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-
-.data-input input {
-  height: 40px;
-  width: 90%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding: 2px;
-}
-
-.data-input input[type="text"] {
-  border: 1px solid black;
-  padding-left: 8px;
-  transition: border-width 0s ease;
-}
-
-.data-input input[type="text"]:focus {
-  border-width: 2px; /* Aumentar a largura da borda quando em foco */
-}
-
-form .pc-button {
+form .mc-button {
   height: 45px;
   width: 200px;
   padding-top: 40px;
@@ -76,22 +29,7 @@ form .pc-button {
   display: block;
 }
 
-.select-especialidade, input {
-  width: calc(100% - 8px);
-  height: 40px;
-  width: 90%;
-  box-sizing: border-box;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding: 2px;
-}
-
-.select-especialidade option {
-  font-size: 16px;
-}
-
-.pc-button button[type="submit"] {
+.mc-button button[type="submit"] {
   height: 100%;
   width: 100%;
   border-radius: 5px;
@@ -103,6 +41,6 @@ form .pc-button {
   background: var(--primary-color);
 }
 
-.pc-button button[type="submit"]:hover {
+.mc-button button[type="submit"]:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-import Endereco from '/src/components/Formularios/enderecos';
+import Endereco from '/src/components/Formularios/enderecos/endereco';
 import DadosPessoais from '/src/components/Formularios/dados/dados-paciente';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

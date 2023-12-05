@@ -1,5 +1,5 @@
 import './style.css';
-import Endereco from '/src/components/Formularios/enderecos';
+import Endereco from '/src/components/Formularios/enderecos/endereco';
 import DadosPessoais from '/src/components/Formularios/dados/dados-medico';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

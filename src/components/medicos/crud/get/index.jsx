@@ -2,13 +2,7 @@ import React, { useState, useEffect } from 'react';
 import API from '/src/api';
 import { toast } from "react-toastify";
 import removeData from '../delete';
-import { useNavigate, useLocation } from 'react-router-dom';
-
-const toastErro = () => {
-  toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
-    position: toast.POSITION.TOP_RIGHT,
-  });
-}
+import { useNavigate } from 'react-router-dom';
 
 // Tabela com todos os médicos ativos
 function getData(especialidades) {
@@ -25,13 +19,14 @@ function getData(especialidades) {
       try {
         let url = 'medico-ms/medicos/ativos?page=0';
         const response = await API.get(url);
-        if (response.status != 200) {
-          return toastErro();
+        if (response.status == 200) {
+          setMedico(response.data["content"]);
         }
-        setMedico(response.data["content"]);
       } catch (error) {
         console.error('Erro na requisição: ', error);
-        return toastErro();
+        return toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
+          position: toast.POSITION.TOP_RIGHT,
+        });;
       }
     };
 

@@ -13,59 +13,16 @@ h3 {
 
 .input-row {
   display: flex;
-  margin-bottom: 10px; /* Espaçamento entre as linhas */
+  margin-bottom: 10px;
 }
 
 .data-input {
-  margin-right: 10px; /* Espaçamento entre os campos */
+  margin-right: 10px;
 }
 
 .cp-title{
     font-size: 28px;
     margin: 40px 0px 40px 120px;
-}
-
-.user-details {
-  display: flex;
-  flex-direction: column; 
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  margin: 20px;
-  padding-top: 20px;
-}
-
-.user-details .data-input {
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 30px);
-}
-
-.obgt {
-  color: red;
-}
-
-form .data-input span.details {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-
-.data-input input {
-  height: 40px;
-  width: 90%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding: 2px;
-}
-
-.data-input input[type="text"] {
-  border: 1px solid black;
-  padding-left: 8px;
-  transition: border-width 0s ease;
-}
-
-.data-input input[type="text"]:focus {
-  border-width: 2px;
 }
 
 form .pc-button {

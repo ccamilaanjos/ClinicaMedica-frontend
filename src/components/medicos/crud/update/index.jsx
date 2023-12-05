@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Endereco from '/src/components/Formularios/enderecos';
+import Endereco from '/src/components/Formularios/enderecos/endereco';
 import DadosPessoais from '/src/components/Formularios/dados/dados-medico';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -57,9 +57,7 @@ function Formulario(crm) {
     const fetchData = async () => {
       API.get(url)
         .then(res => {
-          if (res.status == 200) {
-            setDados(res.data);
-          }
+          setDados(res.data);
         })
         .catch(error => {
           console.error('Erro na requisição: ', error);
@@ -124,7 +122,7 @@ function Formulario(crm) {
   function processForm() {
     const body = {
       "nome": dadosPessoais.nome || currentDadosPessoais.nome,
-      "email": dadosPessoais.email || currentDadosPessoais.email,
+      "email": currentDadosPessoais.email,
       "telefone": dadosPessoais.telefone || currentDadosPessoais.telefone,
       "endereco": {
         "logradouro": endereco.logradouro || currentEndereco.logradouro,
@@ -135,8 +133,8 @@ function Formulario(crm) {
         "uf": endereco.uf || currentEndereco.uf,
         "cep": endereco.cep || currentEndereco.cep
       },
-      "crm": dadosPessoais.crm || currentDadosPessoais.crm,
-      "especialidade": dadosPessoais.especialidade || currentDadosPessoais.especialidade
+      "crm": currentDadosPessoais.crm,
+      "especialidade": currentDadosPessoais.especialidade
     }
     putData(body, crm);
   }

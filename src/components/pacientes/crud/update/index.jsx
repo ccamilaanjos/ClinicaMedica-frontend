@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Endereco from '/src/components/Formularios/enderecos';
+import Endereco from '/src/components/Formularios/enderecos/endereco.jsx';
 import DadosPessoais from '/src/components/Formularios/dados/dados-paciente';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -120,8 +120,8 @@ function Formulario(cpf) {
   function processForm() {
     const body = {
       "nome": dadosPessoais.nome || currentDadosPessoais.nome,
-      "email": dadosPessoais.email || currentDadosPessoais.email,
-      "cpf": dadosPessoais.cpf || currentDadosPessoais.cpf,
+      "email": currentDadosPessoais.email,
+      "cpf": currentDadosPessoais.cpf,
       "telefone": dadosPessoais.telefone || currentDadosPessoais.telefone,
       "endereco": {
         "logradouro": endereco.logradouro || currentEndereco.logradouro,
