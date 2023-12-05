@@ -60,21 +60,20 @@ function Formulario() {
     const { name, value } = event.target;
     const hhFormat = name === 'horario' ? value + ':00' : value;
     const ddFormat = name === 'data' ? formatDate(hhFormat) : hhFormat;
-    const camposAjsutados = ddFormat;
+    const crmTrim = name === 'crm' ? value.trim() : ddFormat;
+    
+    const camposAjsutados = crmTrim;
 
     setDados({
       ...dados,
       [name]: camposAjsutados,
     });
-    
-    console.log(name + " : " + value)
-
   };
-  
+
   function formatDate(data) {
-  const d = data.split('/');
-  return `${d[2]}-${d[1]}-${d[0]}`;
-}
+    const d = data.split('/');
+    return `${d[2]}-${d[1]}-${d[0]}`;
+  }
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -84,7 +83,7 @@ function Formulario() {
   function processForm() {
     const body = {
       "cpf": dados.cpf,
-      "crm": dados.crm || "",
+      "crm": dados.crm,
       "especialidade": dados.especialidade,
       "horario": dados.horario,
       "data": dados.data
