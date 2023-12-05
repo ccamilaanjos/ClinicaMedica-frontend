@@ -1,4 +1,4 @@
-// import './style.css';
+import './style.css';
 import DadosConsulta from '/src/components/Formularios/consultas/consulta';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -82,9 +82,6 @@ function Formulario() {
   };
 
   function processForm() {
-    // let camposValidos = validFields();
-
-    // if (camposValidos) {
     const body = {
       "cpf": dados.cpf,
       "crm": dados.crm || "",
@@ -93,16 +90,15 @@ function Formulario() {
       "data": dados.data
     }
     postData(body);
-    // }
   }
 
   return (
     <div>
-      <h1 className='c-title'>Marcação</h1>
+      <h1 className='m-title'>Marcação</h1>
       <form onSubmit={handleSubmit}>
         <DadosConsulta handleConsultaChange={handleDadosChange} especialidades={especialidades} />
-        <div className="pc-button">
-          <button type='submit'>Cadastrar</button>
+        <div className="mc-button">
+          <button type='submit'>Marcar consulta</button>
         </div>
       </form>
       <ToastContainer />
