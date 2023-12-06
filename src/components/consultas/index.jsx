@@ -51,7 +51,7 @@ function Body() {
   };
 
   const cancelar = (id) => {
-    // return navigate(`cancelar/${id}`, { state: { cancelamento: putData } });
+    // return navigate(`cancelar/${id}`);
   }
 
   return (
