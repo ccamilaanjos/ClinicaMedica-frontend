@@ -12,7 +12,7 @@ function Header () {
             <a href='https://github.com/ccamilaanjos'>Suporte</a>
           </li>
           <li>
-            <a href='/sobre'>Sobre</a>
+            <a href='https://trello.com/invite/b/z6GdAVZd/ATTI6a482e522dea5322bbd51e1e064db32d231103D8/trabalho-pweb-2023-1'>Sobre</a>
           </li>
           <li>
             <div className='search'>
