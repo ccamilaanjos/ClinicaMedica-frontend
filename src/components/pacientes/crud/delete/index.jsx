@@ -22,8 +22,7 @@ function removeData({ setPaciente, pacientes, cpf }) {
         });
       }
     })
-    .catch(error => {
-      console.error("Erro na requisição: " + error);
+    .catch((error) => {
       toast.update(toastId, {
         render: "Falha ao desativar paciente",
         isLoading: false,

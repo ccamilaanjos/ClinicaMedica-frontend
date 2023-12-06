@@ -35,8 +35,8 @@ function putData(pacienteBody, cpf ) {
         });
       }
     })
-    .catch(error => {
-      const errorMessage = ": " + error.response.data.detail || "";
+    .catch((error) => {
+      const errorMessage = ": " + error.response.data.message || "";
       toast.update(toastId, {
         render: "Não foi possível atualizar" + errorMessage,
         isLoading: false,
@@ -58,8 +58,7 @@ function Formulario(cpf) {
             setDados(res.data);
           }
         })
-        .catch(error => {
-          console.error('Erro na requisição: ', error);
+        .catch((error) => {
           return toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
             position: toast.POSITION.TOP_RIGHT,
           });

@@ -34,8 +34,8 @@ function postData(pacienteBody) {
         });
       }
     })
-    .catch(error => {
-      const errorMessage = ": " + error.response?.data?.message || "";
+    .catch((error) => {
+      const errorMessage = ": " + error.response.data.message || "";
       toast.update(toastId, {
         render: "Não foi possível cadastrar" + errorMessage,
         isLoading: false,
