@@ -74,7 +74,6 @@ th {
   border-color: black;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 5px;
   transition: box-shadow 0.3s ease;
 }
 
@@ -86,7 +85,6 @@ th {
   border-color: black;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 5px;
   transition: box-shadow 0.3s ease;
 }
 
@@ -100,4 +98,23 @@ th {
 
 .empty {
   padding: 30px;
+}
+
+.mt-container {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.btPage {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 5px;
+}
+
+.btPage:disabled {
+  background-color: gray;
+} 
+
+.pageInfo {
+  margin: 20px;
 }

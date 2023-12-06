@@ -22,8 +22,7 @@ function removeData({ setMedico, medicos, crm }) {
         });
       }
     })
-    .catch(error => {
-      console.error("Erro na requisição: " + error);
+    .catch((error) => {
       toast.update(toastId, {
         render: "Falha ao desativar médico",
         isLoading: false,

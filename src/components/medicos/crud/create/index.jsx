@@ -22,7 +22,7 @@ function postData(medicoBody) {
   if (!toastId) {
     toastId = toast.loading("Cadastrando...", { autoClose: false });
   }
-  
+
   API.post(url, medicoBody)
     .then(res => {
       if (res.status == 201) {
@@ -34,8 +34,8 @@ function postData(medicoBody) {
         });
       }
     })
-    .catch(error => {
-      const errorMessage = ": " + error.response?.data?.message || "";
+    .catch((error) => {
+      const errorMessage = ": " + error.response.data.message || "";
       toast.update(toastId, {
         render: "Não foi possível cadastrar" + errorMessage,
         isLoading: false,
@@ -74,14 +74,6 @@ function Formulario() {
     complemento: '',
     numero: ''
   });
-  
-   const enderecoObrigatorio = {
-    logradouro: endereco.logradouro,
-    bairro: endereco.bairro,
-    uf: endereco.uf,
-    cidade: endereco.cidade,
-    cep: endereco.cep,
-  }
 
   const handleEnderecoChange = (event) => {
     const { name, value } = event.target;
@@ -90,6 +82,14 @@ function Formulario() {
       [name]: value,
     });
   };
+
+  const enderecoObrigatorio = {
+    logradouro: endereco.logradouro,
+    bairro: endereco.bairro,
+    uf: endereco.uf,
+    cidade: endereco.cidade,
+    cep: endereco.cep,
+  }
 
   const validFields = () => {
     const camposVaziosEmDados = Object.values(dadosPessoais).some((value) => value.trim() === '');

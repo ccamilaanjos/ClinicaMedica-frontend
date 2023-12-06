@@ -12,15 +12,18 @@ function getData(especialidades) {
     return navigate(`atualizar/${crm}`, { state: { especialidades: especialidades } });
   };
 
-  const [medicos, setMedico] = useState([])
+  const [medicos, setMedico] = useState([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [paginaAtual, setPaginaAtual] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let url = 'medico-ms/medicos/ativos?page=0';
+        let url = `medico-ms/medicos/ativos?page=${paginaAtual}`;
         const response = await API.get(url);
         if (response.status == 200) {
           setMedico(response.data["content"]);
+          setTotalPages(response.data["totalPages"]);
         }
       } catch (error) {
         console.error('Erro na requisição: ', error);
@@ -31,7 +34,7 @@ function getData(especialidades) {
     };
 
     fetchData();
-  }, []);
+  }, [paginaAtual]);
 
   function medicoRow() {
     return (
@@ -58,6 +61,20 @@ function getData(especialidades) {
     )
   }
 
+  // Se a página atual não for a primeira, ir para a anterior
+  const handlePrevious = () => {
+    if (paginaAtual + 1 > 1) {
+      setPaginaAtual(paginaAtual - 1);
+    }
+  };
+
+  // Se a página atual não for a última, ir para a próxima
+  const handleNext = () => {
+    if (paginaAtual < totalPages) {
+      setPaginaAtual(paginaAtual + 1);
+    }
+  };
+
   return (
     <>
       {medicos === null || medicos.length === 0 ? (
@@ -66,17 +83,36 @@ function getData(especialidades) {
           <h2>Nenhum médico cadastrado</h2>
         </div>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Email</th>
-              <th>CRM</th>
-              <th>Especialidade</th>
-            </tr>
-          </thead>
-          {medicoRow(medicos)}
-        </table>)}
+        <div className='mt-container'>
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>CRM</th>
+                <th>Especialidade</th>
+              </tr>
+            </thead>
+            {medicoRow(medicos)}
+          </table>
+          <br></br>
+          <div>
+            <button
+              className='btPage'
+              onClick={handlePrevious}
+              disabled={paginaAtual === 0}>
+              Anterior
+            </button>
+            <span className='pageInfo'>Página {paginaAtual + 1} de {totalPages}</span>
+            <button
+              className='btPage'
+              onClick={handleNext}
+              disabled={paginaAtual + 1 === totalPages}>
+              Próxima
+            </button>
+          </div>
+        </div>
+      )}
     </>
   )
 }
