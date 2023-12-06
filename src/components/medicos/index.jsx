@@ -25,10 +25,7 @@ function Body() {
         setEspecialidades(titulos);
 
       } catch (error) {
-        console.error('Erro na requisição: ', error);
-        return toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
-          position: toast.POSITION.TOP_RIGHT,
-        });
+        // Toast removido para evitar duplicação
       }
     };
 

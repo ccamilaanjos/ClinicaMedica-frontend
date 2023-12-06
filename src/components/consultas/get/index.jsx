@@ -18,6 +18,7 @@ function getData(putData) {
           setTotalPages(response.data["totalPages"])
         }
       } catch (error) {
+        toast.dismiss();
         return toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
           position: toast.POSITION.TOP_RIGHT,
         });;

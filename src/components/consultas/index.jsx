@@ -16,7 +16,6 @@ function Consultas() {
 const putData = (id, consultaBody) => {
   let toastId = null;
   let url = `consulta-ms/consultas/cancelar?id=${id}`;
-  console.log(consultaBody)
   
   if (!toastId) {
     toastId = toast.loading("Cancelando...", { autoClose: false });
@@ -45,32 +44,10 @@ const putData = (id, consultaBody) => {
 }
 
 function Body() {
-  const [especialidades, setEspecialidades] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let url = 'medico-ms/especialidades/todas';
-        const response = await API.get(url);
-        const titulos = response.data.map(especialidade => especialidade.titulo);
-        setEspecialidades(titulos);
-
-      } catch (error) {
-        console.error('Erro na requisição: ', error);
-        return toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      }
-    };
-
-    fetchData();
-
-  }, []);
-
   const navigate = useNavigate();
 
   const marcar = () => {
-    return navigate('marcar', { state: { especialidades: especialidades } });
+    return navigate('marcar');
   };
 
   const cancelar = (id) => {

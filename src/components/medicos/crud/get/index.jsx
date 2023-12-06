@@ -26,7 +26,6 @@ function getData(especialidades) {
           setTotalPages(response.data["totalPages"]);
         }
       } catch (error) {
-        console.error('Erro na requisição: ', error);
         return toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
           position: toast.POSITION.TOP_RIGHT,
         });;

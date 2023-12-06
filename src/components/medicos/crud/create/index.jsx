@@ -49,6 +49,12 @@ function Formulario() {
   const location = useLocation();
   const especialidades = location.state.especialidades;
 
+  if (especialidades === null || especialidades.length === 0) {
+    toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  }
+
   const [dadosPessoais, setDadosPessoais] = useState({
     nome: '',
     email: '',

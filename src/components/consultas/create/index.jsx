@@ -1,10 +1,9 @@
-import './style.css';
+import React, { useState, useEffect } from 'react';
 import DadosConsulta from '/src/components/Formularios/consultas/consulta';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import API from '/src/api';
+import './style.css';
 
 function MarcacaoConsulta() {
   return (
@@ -45,8 +44,26 @@ function postData(consultaBody) {
 }
 
 function Formulario() {
-  const location = useLocation();
-  const especialidades = location.state.especialidades;
+  const [especialidades, setEspecialidades] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let url = 'medico-ms/especialidades/todas';
+        const response = await API.get(url);
+        const titulos = response.data.map(especialidade => especialidade.titulo);
+        setEspecialidades(titulos);
+
+      } catch (error) {
+        return toast.error('Não foi possível conectar ao servidor. Tente novamente mais tarde.', {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+    };
+
+    fetchData();
+
+  }, []);
 
   const [dados, setDados] = useState({
     "cpf": '',
