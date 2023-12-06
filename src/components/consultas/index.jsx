@@ -1,8 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import './style.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import API from '../../api';
 import { ToastContainer, toast } from 'react-toastify';
+import getData from './get';
 
 function Consultas() {
   return (
@@ -10,6 +11,37 @@ function Consultas() {
       <Body />
     </div>
   )
+}
+
+const putData = (id, consultaBody) => {
+  let toastId = null;
+  let url = `consulta-ms/consultas/cancelar?id=${id}`;
+  console.log(consultaBody)
+  
+  if (!toastId) {
+    toastId = toast.loading("Cancelando...", { autoClose: false });
+  }
+
+  API.put(url, consultaBody)
+    .then(res => {
+      if (res.status == 200) {
+        toast.update(toastId, {
+          render: "Consulta cancelada!",
+          isLoading: false,
+          type: "success",
+          autoClose: true
+        });
+      }
+    })
+    .catch((error) => {
+      const errorMessage = ": " + error.response.data.message || "";
+      toast.update(toastId, {
+        render: "Não foi possível cancelar" + errorMessage,
+        isLoading: false,
+        type: "error",
+        autoClose: true
+      });
+    });
 }
 
 function Body() {
@@ -40,9 +72,9 @@ function Body() {
   const marcar = () => {
     return navigate('marcar', { state: { especialidades: especialidades } });
   };
-  
+
   const cancelar = (id) => {
-    return navigate(`cancelar/${id}`);
+    // return navigate(`cancelar/${id}`, { state: { cancelamento: putData } });
   }
 
   return (
@@ -61,7 +93,7 @@ function Body() {
           </button>
         </div>
         <div className='consultas-table'>
-          {/*getData(especialidades)*/}
+          {getData(putData)}
         </div>
       </div>
       <div className='empty'>

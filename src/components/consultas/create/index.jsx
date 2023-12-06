@@ -33,8 +33,8 @@ function postData(consultaBody) {
         });
       }
     })
-    .catch(error => {
-      const errorMessage = ": " + error.response?.data?.message || "";
+    .catch((error) => {
+      const errorMessage = ": " + error.response.data.message || "";
       toast.update(toastId, {
         render: "Não foi possível marcar" + errorMessage,
         isLoading: false,

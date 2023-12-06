@@ -11,6 +11,7 @@ import AtualizacaoMedico from './components/Medicos/crud/update';
 import Consultas from './components/Consultas';
 import MarcacaoConsulta from './components/Consultas/create';
 import NotFound from './components/NotFound';
+import CancelamentoConsulta from './components/Consultas/cancel';
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
         <Route path='/consultas'>
           <Route index={true} element={<Consultas />} />
           <Route path='marcar' element={<MarcacaoConsulta />} />
-          {/* <Route path='cancelar/:id' element={<MarcacaoConsulta />} /> */}
+          <Route path='cancelar/:id' element={<CancelamentoConsulta />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
